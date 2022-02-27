@@ -36,3 +36,42 @@ MyString MyString::filter(int (*callback)(int)) const
 	}
 	return newStr;
 }
+
+bool MyString::every(int (*callback)(int)) const
+{
+	MyString newStr;
+
+	for (size_t i = 0; i < this->length(); i++)
+	{
+		bool res = callback((*this)[i]);
+		if (!res)
+			return false;
+	}
+	return true;
+}
+
+bool MyString::some(int (*callback)(int)) const
+{
+	MyString newStr;
+
+	for (size_t i = 0; i < this->length(); i++)
+	{
+		bool res = callback((*this)[i]);
+		if (res)
+			return true;
+	}
+	return false;
+}
+
+int MyString::findIndex(int (*callback)(int)) const
+{
+	MyString newStr;
+
+	for (size_t i = 0; i < this->length(); i++)
+	{
+		bool res = callback((*this)[i]);
+		if (res)
+			return i;
+	}
+	return -1;
+}
