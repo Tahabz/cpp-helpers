@@ -113,6 +113,16 @@ public:
 		this->length += 1;
 		return *this;
 	};
+
+	template <typename X>
+	X reduce(X (*callback)(X, T), X acc)
+	{
+		for (size_t i = 0; i < this->length; i++)
+		{
+			acc = callback(acc, this->_iter[i]);
+		}
+		return acc;
+	}
 };
 
 #endif // ITERABLE_HPP
