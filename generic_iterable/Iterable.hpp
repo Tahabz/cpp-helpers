@@ -49,7 +49,7 @@ public:
 		{
 			bool res = callback((this->_iter)[i], i);
 			if (res)
-				newIter.pushBack((this->_iter)[i], i);
+				newIter.pushBack(this->_iter[i]);
 		}
 		return newIter;
 	};
@@ -59,7 +59,7 @@ public:
 		Iterable newIter;
 		for (size_t i = 0; i < this->length; i++)
 		{
-			newIter.pushBack(callback((this->_iter)[i], i));
+			newIter.pushBack(callback(this->_iter[i], i));
 		}
 		return newIter;
 	};
