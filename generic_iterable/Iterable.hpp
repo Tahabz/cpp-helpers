@@ -2,7 +2,7 @@
 #define ITERABLE_HPP
 #include <stdio.h>
 #include <iostream>
-template <typename T, typename B>
+template <typename T>
 class Iterable
 {
 private:
@@ -29,7 +29,7 @@ public:
 	// 	return;
 	// };
 
-	Iterable forEach(void (*callback)(B)) const
+	Iterable forEach(void (*callback)(T)) const
 	{
 		for (size_t i = 0; i < this->length; i++)
 			callback((this->_iter)[i]);
@@ -41,7 +41,7 @@ public:
 		return this->_iter;
 	};
 
-	Iterable filter(B (*callback)(B)) const
+	Iterable filter(bool (*callback)(T)) const
 	{
 		Iterable newIter;
 
@@ -54,7 +54,7 @@ public:
 		return newIter;
 	};
 
-	Iterable map(B (*callback)(B)) const
+	Iterable map(T (*callback)(T)) const
 	{
 		Iterable newIter;
 		for (size_t i = 0; i < this->length; i++)
@@ -64,7 +64,7 @@ public:
 		return newIter;
 	};
 
-	bool every(B (*callback)(B)) const
+	bool every(bool (*callback)(T)) const
 	{
 		for (size_t i = 0; i < this->length; i++)
 		{
@@ -75,7 +75,7 @@ public:
 		return true;
 	};
 
-	bool some(B (*callback)(B)) const
+	bool some(bool (*callback)(T)) const
 	{
 		for (size_t i = 0; i < this->length; i++)
 		{
@@ -86,7 +86,7 @@ public:
 		return false;
 	};
 
-	B findIndex(B (*callback)(B)) const
+	size_t findIndex(bool (*callback)(T)) const
 	{
 		for (size_t i = 0; i < this->length; i++)
 		{
