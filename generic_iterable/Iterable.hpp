@@ -29,10 +29,10 @@ public:
 	// 	return;
 	// };
 
-	Iterable forEach(void (*callback)(T)) const
+	Iterable forEach(void (*callback)(T, int)) const
 	{
 		for (size_t i = 0; i < this->length; i++)
-			callback((this->_iter)[i]);
+			callback((this->_iter)[i], i);
 		return *this;
 	};
 
@@ -41,25 +41,25 @@ public:
 		return this->_iter;
 	};
 
-	Iterable filter(bool (*callback)(T)) const
+	Iterable filter(bool (*callback)(T, int)) const
 	{
 		Iterable newIter;
 
 		for (size_t i = 0; i < this->length; i++)
 		{
-			bool res = callback((this->_iter)[i]);
+			bool res = callback((this->_iter)[i], i);
 			if (res)
-				newIter.pushBack((this->_iter)[i]);
+				newIter.pushBack((this->_iter)[i], i);
 		}
 		return newIter;
 	};
 
-	Iterable map(T (*callback)(T)) const
+	Iterable map(T (*callback)(T, int i)) const
 	{
 		Iterable newIter;
 		for (size_t i = 0; i < this->length; i++)
 		{
-			newIter.pushBack(callback((this->_iter)[i]));
+			newIter.pushBack(callback((this->_iter)[i], i));
 		}
 		return newIter;
 	};
