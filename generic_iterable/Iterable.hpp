@@ -114,7 +114,7 @@ public:
 		return *this;
 	};
 
-	template <typename X>
+	template <typename X = T>
 	X reduce(X (*callback)(X, T), X acc)
 	{
 		for (size_t i = 0; i < this->length; i++)
