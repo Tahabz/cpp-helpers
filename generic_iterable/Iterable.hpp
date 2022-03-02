@@ -29,7 +29,7 @@ public:
 	// 	return;
 	// };
 
-	Iterable forEach(void (*callback)(T, int)) const
+	Iterable forEach(void (*callback)(T value, size_t index)) const
 	{
 		for (size_t i = 0; i < this->length; i++)
 			callback((this->_iter)[i], i);
@@ -41,7 +41,7 @@ public:
 		return this->_iter;
 	};
 
-	Iterable filter(bool (*callback)(T, int)) const
+	Iterable filter(bool (*callback)(T value, size_t index)) const
 	{
 		Iterable newIter;
 
@@ -54,7 +54,7 @@ public:
 		return newIter;
 	};
 
-	Iterable map(T (*callback)(T, int i)) const
+	Iterable map(T (*callback)(T value, size_t index)) const
 	{
 		Iterable newIter;
 		for (size_t i = 0; i < this->length; i++)
@@ -64,18 +64,18 @@ public:
 		return newIter;
 	};
 
-	bool every(bool (*callback)(T)) const
+	bool every(bool (*callback)(T value, size_t index)) const
 	{
 		for (size_t i = 0; i < this->length; i++)
 		{
-			bool res = callback((this->_iter)[i]);
+			bool res = callback((this->_iter)[i], index);
 			if (!res)
 				return false;
 		}
 		return true;
 	};
 
-	bool some(bool (*callback)(T)) const
+	bool some(bool (*callback)(value T, size_t index)) const
 	{
 		for (size_t i = 0; i < this->length; i++)
 		{
@@ -86,7 +86,7 @@ public:
 		return false;
 	};
 
-	size_t findIndex(bool (*callback)(T)) const
+	size_t findIndex(bool (*callback)(T value, size_t index)) const
 	{
 		for (size_t i = 0; i < this->length; i++)
 		{
@@ -115,11 +115,11 @@ public:
 	};
 
 	template <typename X = T>
-	X reduce(X (*callback)(X, T), X acc)
+	X reduce(X (*callback)(X acc, T curr, size_t index), X acc)
 	{
 		for (size_t i = 0; i < this->length; i++)
 		{
-			acc = callback(acc, this->_iter[i]);
+			acc = callback(acc, this->_iter[i], i);
 		}
 		return acc;
 	}
