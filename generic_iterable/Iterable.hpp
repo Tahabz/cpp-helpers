@@ -15,19 +15,7 @@ public:
 		return;
 	};
 
-	Iterable(size_t length) : length(length)
-	{
-		this->_iter = (T *)malloc(sizeof(T) * length);
-		return;
-	};
-
 	Iterable() : _iter(), length(0) { return; };
-
-	// ~Iterable()
-	// {
-	// 	delete this->_iter;
-	// 	return;
-	// };
 
 	Iterable forEach(void (*callback)(T value, size_t index)) const
 	{
