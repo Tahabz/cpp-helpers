@@ -75,7 +75,7 @@ public:
 		return true;
 	};
 
-	bool some(bool (*callback)(value T, size_t index)) const
+	bool some(bool (*callback)(T value, size_t index)) const
 	{
 		for (size_t i = 0; i < this->length; i++)
 		{
