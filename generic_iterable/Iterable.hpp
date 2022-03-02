@@ -88,8 +88,9 @@ public:
 	Iterable pushBack(T input)
 	{
 		size_t i;
-		T *tmpIter = (T *)malloc(sizeof(T) * (this->length + 1));
+		// T *tmpIter = (T *)malloc(sizeof(T) * (this->length + 1));
 
+		T *tmpIter = new T[sizeof(T) * (this->length + 1)];
 		i = 0;
 		while (i < this->length)
 		{
@@ -97,6 +98,7 @@ public:
 			i += 1;
 		}
 		tmpIter[i] = input;
+		delete[] this->_iter;
 		this->_iter = tmpIter;
 		this->length += 1;
 		return *this;
